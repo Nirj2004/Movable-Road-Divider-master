@@ -24,6 +24,7 @@ void setup() {
   count2 = 0;
   movement = 0.0;
   DIVIDER_POS = 0;
+  pinMode(1, INPUT_PULLUP);
   pinMode(2, INPUT_PULLUP);
   pinMode(3, INPUT_PULLUP);
   pinMode(4, INPUT_PULLUP);
@@ -42,7 +43,7 @@ void setup() {
 }
 
 void loop() {
-  //moveFwd(1000);
+  moveFwd(1000);
   int read1 = digitalRead(2);
   int read2 = digitalRead(3);
   int read3 = digitalRead(4);
@@ -57,7 +58,7 @@ void loop() {
     int read3 = digitalRead(4);
     int read4 = digitalRead(5);
     Serial.print(count1);
-    Serial.print("--");
+    Serial.print("\n");
     Serial.print(count2);
     Serial.print("\n");
     if ( read1 == 1 ) {
@@ -129,13 +130,13 @@ void loop() {
 
 void moveFwd(int dist) {
     analogWrite(motorPWM1, LeftSpeed);
-    analogWirte(motorPWM2, RightSpeed);
+    analogWrite(motorPWM2, RightSpeed);
     digitalWrite(motorFwd1, HIGH);
-    digitalWrite(motorRev1, LOW);
-    digitalWite(motorFwd2, HIGH);
+    digitalWrite(motorRev1, HIGH);
+    digitalWrite(motorFwd2, HIGH);
     digitalWrite(motorRev2, LOW);
-    dealy(dist * delayTime);
-    digitalWrite(motorRev1, LOW);
+    delay(dist * delayTime);
+    digitalWrite(motorRev1, HIGH);
     digitalWrite(motorRev2, LOW);
 }
 
